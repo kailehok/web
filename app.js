@@ -138,6 +138,20 @@ app.post('/api/delete-marble', async function(req,res) {
     });
 });
 
+app.post('/api/delete-owner', async function(req,res) {   
+    var args = [req.body.owner_id,req.body.auth_company];  
+    if (!args) {
+		res.status(400).json(getErrorMessage('\'args\''));
+		return;
+    }  
+    
+    invokeCC.invokeChaincode('disable_owner',args).then(() => {
+        res.json({success: true, message: JSON.stringify(args)}); 
+    }, (err) => {
+        res.status(500).json({success: false, message: err.message});
+    });
+});
+
 app.get('/api/read-marble', async function(req,res){
     var args = [req.body.marble_id]
 
