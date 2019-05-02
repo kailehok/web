@@ -152,17 +152,9 @@ app.post('/api/delete-owner', async function(req,res) {
     });
 });
 
-app.get('/api/read-marble', async function(req,res){
-    var args = [req.body.marble_id]
 
-    queryCC.queryChaincode('read',args).then((result) => {
-        res.json({success:true, message:JSON.stringify(result)})
-    }, (err) => {
-        res.status(500).json({success:false,message:err.message});
-    });
-});
 
-app.get('/api/read-owners', async function(req,res){
+app.get('/api/read-all', async function(req,res){
     queryCC.queryChaincode('read_everything',['_ownerindex']).then((result) => {
        
         res.json({success:true, message: JSON.parse(result)})
@@ -171,15 +163,6 @@ app.get('/api/read-owners', async function(req,res){
     });
 });
 
-app.get('/api/read-owner', async function(req,res){
-    var full_username = build_owner_name(req.body.marble_owner, req.body.owners_company);
-
-    queryCC.queryChaincode('read',[full_username]).then((result) => {
-        res.json({success:true, message:JSON.stringify(result)})
-    }, (err) => {
-        res.status(500).json({success:false,message:err.message});
-    });
-});
 
 function build_owner_name(username, company) {
     return username.toLowerCase() + '.' + company;
