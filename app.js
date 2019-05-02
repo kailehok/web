@@ -83,7 +83,7 @@ function getErrorMessage(field) {
 
 app.post('/api/create-marbles', async function(req,res) {
    
-    var args = ['m' + leftPad(Date.now() + randStr(5), 19),req.body.color,req.body.size,req.body.owner_id,req.body.authed_by_company];
+    var args = ['m' + leftPad(Date.now() + randStr(5), 19),req.body.color,req.body.size,req.body.owner_id,"United Marbles"];
     if (!args) {
 		res.status(400).json(getErrorMessage('\'args\''));
 		return;
@@ -97,7 +97,7 @@ app.post('/api/create-marbles', async function(req,res) {
 });
 
 app.post('/api/create-owner', async function(req,res) {   
-    var args = ['o' + leftPad(Date.now() + randStr(5), 19),req.body.marble_owner,req.body.owners_company];
+    var args = ['o' + leftPad(Date.now() + randStr(5), 19),req.body.marble_owner,"United Marbles"];
     if (!args) {
 		res.status(400).json(getErrorMessage('\'args\''));
 		return;
@@ -111,7 +111,7 @@ app.post('/api/create-owner', async function(req,res) {
 });
 
 app.post('/api/transfer-marble', async function(req,res) {   
-    var args = [req.body.marble_id,req.body.owner_id,req.body.auth_company];  
+    var args = [req.body.marble_id,req.body.owner_id,"United Marbles"];  
     if (!args) {
 		res.status(400).json(getErrorMessage('\'args\''));
 		return;
@@ -125,7 +125,7 @@ app.post('/api/transfer-marble', async function(req,res) {
 });
 
 app.post('/api/delete-marble', async function(req,res) {   
-    var args = [req.body.marble_id,req.body.auth_company];  
+    var args = [req.body.marble_id,"United Marbles"];  
     if (!args) {
 		res.status(400).json(getErrorMessage('\'args\''));
 		return;
@@ -139,7 +139,7 @@ app.post('/api/delete-marble', async function(req,res) {
 });
 
 app.post('/api/delete-owner', async function(req,res) {   
-    var args = [req.body.owner_id,req.body.auth_company];  
+    var args = [req.body.owner_id,"United Marbles"];  
     if (!args) {
 		res.status(400).json(getErrorMessage('\'args\''));
 		return;
@@ -164,9 +164,6 @@ app.get('/api/read-all', async function(req,res){
 });
 
 
-function build_owner_name(username, company) {
-    return username.toLowerCase() + '.' + company;
-}
 
 function leftPad(str, length) {
     for (var i = str.length; i < length; i++) str = '0' + String(str);
