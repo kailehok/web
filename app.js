@@ -90,7 +90,7 @@ app.post('/api/create-marbles', async function(req,res) {
     }
   
     invokeCC.invokeChaincode('init_marble',args).then(() => {
-        res.json({success: true, message: JSON.stringify(args)}); 
+        res.json({success: true, message: args[0]}); 
     }, (err) => {
         res.status(500).json({success: false, message: err.message});
     });
@@ -118,7 +118,7 @@ app.post('/api/transfer-marble', async function(req,res) {
     }
  
     invokeCC.invokeChaincode('set_owner',args).then(() => {
-        res.json({success: true, message: JSON.stringify(args)}); 
+        res.json({success: true, message: args}); 
     }, (err) => {
         res.status(500).json({success: false, message: err.message});
     });
@@ -132,7 +132,7 @@ app.post('/api/delete-marble', async function(req,res) {
     }  
     
     invokeCC.invokeChaincode('delete_marble',args).then(() => {
-        res.json({success: true, message: JSON.stringify(args)}); 
+        res.json({success: true, message: args}); 
     }, (err) => {
         res.status(500).json({success: false, message: err.message});
     });
@@ -146,7 +146,7 @@ app.post('/api/delete-owner', async function(req,res) {
     }  
     
     invokeCC.invokeChaincode('disable_owner',args).then(() => {
-        res.json({success: true, message: JSON.stringify(args)}); 
+        res.json({success: true, message: args}); 
     }, (err) => {
         res.status(500).json({success: false, message: err.message});
     });
