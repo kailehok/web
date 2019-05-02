@@ -81,7 +81,7 @@ function getErrorMessage(field) {
 	return response;
 }
 
-app.post('/api/create-marbles', async function(req,res) {
+app.post('/api/create-marble', async function(req,res) {
    
     var args = ['m' + leftPad(Date.now() + randStr(5), 19),req.body.color,req.body.size,req.body.owner_id,"United Marbles"];
     if (!args) {
@@ -138,7 +138,7 @@ app.post('/api/delete-marble', async function(req,res) {
     });
 });
 
-app.post('/api/delete-owner', async function(req,res) {   
+app.post('/api/disable-owner', async function(req,res) {   
     var args = [req.body.owner_id,"United Marbles"];  
     if (!args) {
 		res.status(400).json(getErrorMessage('\'args\''));
